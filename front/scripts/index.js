@@ -1,5 +1,5 @@
-console.log(tempData);
-import tempData from './tempData.js';
+// console.log(tempData);
+// import tempData from './tempData.js';
 
 function crearTarjetaMovie(movie) {
     const { title, year, director, duration, genre, rate, poster } = movie;
@@ -59,17 +59,19 @@ function crearTarjetaMovie(movie) {
 }
 
 //funcion para renderizar todas las peliculas
-function renderizarMovies() {
+function obtenerYRenderizarMovies() {
     const contenedor = document.getElementById('container-pelis')
-
     //Vaciar contenedor y evitar duplicados 
     contenedor.innerHTML = '';
 
-    tempData.forEach((movie) => {
-        const tarjeta = crearTarjetaMovie(movie);
-        contenedor.appendChild(tarjeta);
+    $.get(`https://students-api.up.railway.app/movies`,(data,status)=>{
+
+        data.forEach((movie) => {
+            const tarjeta = crearTarjetaMovie(movie);
+            contenedor.appendChild(tarjeta);
+        })
     })
 }
 
 //Ejecutar la función cuando la página cargue
-document.addEventListener('DOMContentLoaded', renderizarMovies);
+document.addEventListener('DOMContentLoaded', obtenerYRenderizarMovies);
