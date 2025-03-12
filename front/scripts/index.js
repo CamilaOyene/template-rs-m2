@@ -8,8 +8,10 @@ function crearTarjetaMovie(movie) {
     //crear tarjeta = div
     const tarjetaMovie = document.createElement('div');
     //Asignar el valor correspondiente a la propiedad del elemento
-    tarjetaMovie.classList.add('tarjetaMovie');
-
+    // tarjetaMovie.classList.add('tarjetaMovie');
+    tarjetaMovie.classList.add('card', 'text-light', 'bg-dark', 'shadow', 'p-3', 'mb-4');
+    tarjetaMovie.style.width = '18rem';
+    
     //title = h3
     const titulo = document.createElement('h3')
     //Asignar valor correspondiente a las propiedades del elemento 
@@ -43,6 +45,7 @@ function crearTarjetaMovie(movie) {
     //poster =
     const imagenMovie = document.createElement('img');
     //Asignar valor correspondiente a las propiedades del elemento 
+    imagenMovie.classList.add('card-img-top');
     imagenMovie.src = poster
     imagenMovie.alt = `Poster de ${title}`;
 
@@ -66,9 +69,12 @@ function obtenerYRenderizarMovies() {
 
     $.get(`https://students-api.up.railway.app/movies`,(data,status)=>{
 
-        data.forEach((movie) => {
+        data.forEach((movie) =>{
             const tarjeta = crearTarjetaMovie(movie);
-            contenedor.appendChild(tarjeta);
+            const col = document.createElement('div');
+            col.classList.add('col-md-4', 'd-flex', 'justify-content-center');
+            col.appendChild(tarjeta);
+            contenedor.appendChild(col);
         })
     })
 }
